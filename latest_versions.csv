@@ -1,0 +1,6 @@
+sno,name,latest_version,source_url,status
+1,Python,Unknown,,needs_review
+2,Git,Unknown,,needs_review
+3,Visual Studio Code,Unknown,https://code.visualstudio.com,needs_review
+4,Node.js,Unknown,,needs_review
+5,uv,Unknown,,needs_review
