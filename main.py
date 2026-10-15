@@ -27,6 +27,7 @@ def read_software_list():
         for row in reader:
             if not (row.get("name") or "").strip():
                 continue
+
             software_list.append({
                 "sno": (row.get("sno") or "").strip(),
                 "name": row["name"].strip(),
@@ -34,16 +35,19 @@ def read_software_list():
                 "url": (row.get("url") or "").strip(),
             })
         return software_list
+    
 def search_software(software):
     """Search the web for current software version information."""
     name = software["name"]
     query = f"{name} latest stable release version official"
+
     try:
         results = DDGS().text(query, max_results=5)
         return list(results)
     except Exception as error:
         print(f"Search failed for {name}: {error}")
         return []
+    
 def ask_claude(software, search_results, client):
     """Ask Claude to identify the latest version from search results."""
     prompt = f"""
@@ -52,6 +56,7 @@ Find the latest stable release version of the requested software.
 Software name: {software['name']}
 Version supplied by user: {software['version'] or 'Not provided'}
 User-provided URL: {software['url'] or 'Not provided'}
+
 Web search results:
 {json.dumps(search_results, ensure_ascii=False, indent=2)}
 Instructions:
